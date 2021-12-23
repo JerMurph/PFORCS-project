@@ -15,7 +15,8 @@ When running this program for the first time, the user will be given a menu with
 </br>
 <li>Entering 1 will open the Encrypt option. This allows the user to enter the text they wish to encrypt and they will they be further asked to enter a number from 1 to 25 to signify the amount the letters will shift by. The program will then perform the shift of the user's input and displays the result on the screen.</li>
 <li>Entering 2 will open the Decrypt option. This allows the user to enter the text they wish to decrypt, assuming they know both the encrypted text and the correct number of shifts which will display the original text before it was encrypted.</li>
-<li>Entering 3 will open the Brute Force Decrypt option. This allows the user to enter the text they wish to decrypt but do not know the number of shifts to correctly decipher it. Because of this, the user is not asked to enter a number to shift by and the end result will display a list of all possible shifts for the text from 1 to 25</li>
+<li>Entering 3 will open the Brute Force Decrypt option. This allows the user to enter the text they wish to decrypt but do not know the number of shifts to correctly decipher it. Because of this, the user is not asked to enter a number to shift by and the end result will display a list of all possible shifts for the text from 1 to 25.</li>
+<li>Entering 4 will exit the program.</li>
 
 </br></br>
 </h2><b>References:</b></h2></br>
