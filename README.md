@@ -4,6 +4,11 @@
 Supposedly named after the Roman Emperor Julius Caesar who had used this method of encryption to protect vital military commuication, the Caesar Cipher is one of the earliest and most simplest form of encryption. The Caesar Cipher is a subtitution cipher that works by replacing each letter from a given text by a letter some fixed number of positions down the alphabet. For example, a shift of 6 would mean that G would be replaced by A, H would be replaced by B and so on.
 
 </br></br>
+</h2><b>Research:</b></h2></br>
+As I was my knowledge with encryption and ciphers are very limited, I did a simple Google search to get an understanding as to how the Caesar Cipher works in laymans terms so I looked up the Wikipedia entry as well as any other sites that would give a clear explanation as to how it works. Through these searches, I came across a site called dCode which has an online Caesar Cipher which I used to run multiple times to see how it runs and how to be able to apply this to my own program including doing a brute force decryption.
+
+
+</br></br>
 </h2><b>Program Overview:</b></h2></br>
 When running this program for the first time, the user will be given a menu with 4 options and the user will then have to enter a number from 1 to 4 to select the option they want:
 
