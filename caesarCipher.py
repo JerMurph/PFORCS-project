@@ -1,17 +1,17 @@
 import sys
-
 #Used this site as a cross reference to make sure my cipher was accurate
 #https://www.dcode.fr/caesar-cipher
 
-#Sample texts for testing decryption and encryption:
+#Main menu which displays all possible options the user can pick from
 
-#hello
-#nkrru (Shift by 6)
+alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+ "k", "l", "m", "n", "o", "p", "q", "r", 
+ "s", "t", "u", "v", "w", "x", "y", "z"] #Array containing the alphabet
 
-#a wall of text is an excessively long post, which can often be so long that some don't read it.
-#g cgrr ul zkdz oy gt kdikyyobkre rutm vuyz zu g tuzoikhugxj ux zgrq vgmk joyiayyout, cnoin igt ulzkt hk yu rutm zngz yusk jut'z xkgj oz. (Shift by 6)
+newAlphabet = {} #Alphabet after shifting by the user's inputted number
  
 def menu():
+
     print("CAESAR CIPHER")
     print("===================")
     print("1: Encrypt")
@@ -19,105 +19,99 @@ def menu():
     print("3: Decrypt (Brute Force)")
     print("4: Exit")
     
+    #User has to pick an option from 1 to 4 otherwise the program keeps looping back until the user inputs a valid entry
     while True:
         try:
-            option = int(input("Enter a number from 1-4: "))
+            option = int(input("Enter a number from 1-4: ")) #Enter a number
 
             if option == 1:
-                encrypt()
+                encrypt() #Option 1 brings up the encryption section
                 break
             elif option == 2:
-                decrypt()
+                decrypt() #Option 2 brings up the decryption section
                 break
             elif option == 3:
-                bruteForceDecrypt()
+                bruteForceDecrypt() #Option 3 will up the brute force decryption section
                 break
             elif option == 4:
-                print("Goodbye")
+                print("Goodbye") #Option 4 exits the program
                 sys.exit()
             else:
-                print("You must pick a number from 1-4!")
+                print("You must pick a number from 1-4!") #Loops back if a number not between 1 to 4 is entered
         except ValueError:
-            print("You must enter a number!")
+            print("You must enter a number!") #Loops back if anything but a number isn't entered
 
+#This function takes user's input and encrypts the text 
 def encrypt():
 
     while True:
         try:
-            encryptMsg = input("Enter your message for encryption: ").lower()
-            numShift = int(input("Enter the number of letters you would like to shift by: "))
+            encryptMsg = input("Enter your message for encryption: ").lower() #Enter the text for encryption
+            numShift = int(input("Enter the number of letters you would like to shift by: ")) #Enter the number of letters to shift by
 
-            if numShift > 0 and numShift <= 25:
+            if numShift > 0 and numShift <= 25: #Check the shift number is greater than 1 and less or equal to 25
                 break
 
         except ValueError:
-            print("You must enter a number!")
+            print("You must enter a number!") #Error if a number isn't entered
         else:
-            print("You must enter a number from 1 to 25!")
+            print("You must enter a number from 1 to 25!") #Error if a number less than 1 or greater than 25 is entered
 
     encryptedMsg = ""
 
-    for symbol in encryptMsg:
-        if symbol.isalpha():
-            num = ord(symbol)
-            num += numShift
+    #Loop through the alphabet array, shifting by the number inputted by the user
+    for i in range(len(alphabet)):
+        letter = alphabet[i]
+        shiftedLetter = alphabet[(i+numShift)%26]
+        newAlphabet[letter] = shiftedLetter #Shifted alphabet is put into the newAlphabet array
 
-            if symbol.isupper():
-                if num > ord('Z'):
-                    num -= 26
-                elif num < ord('A'):
-                    num += 26
-            elif symbol.islower():
-                if num > ord('z'):
-                    num -= 26
-                elif num < ord('a'):
-                    num += 26
-            encryptedMsg += chr(num)
+    #Loop through the letters in the text that was inputted by the user
+    for letter in encryptMsg:
+        if letter in alphabet:
+            letter = newAlphabet[letter]
+            encryptedMsg = encryptedMsg + letter
         else:
-            encryptedMsg += symbol
+            encryptedMsg = encryptedMsg + letter
 
     print("Encrypted Message: " + encryptedMsg)
 
+#Decrypts the text inputted by the user which decrypts the text inputted by the user, assuming they know the message and shift number
 def decrypt():
 
     while True:
         try:
-            decryptMsg = input("Enter your message for decryption: ").lower()
-            numShift = int(input("Enter the number of letters you would like to shift by: "))
+            decryptMsg = input("Enter your message for decryption: ").lower() #Enter the text for dedryption
+            numShift = int(input("Enter the number of letters you would like to shift by: ")) #Enter the number of letters to shift by
 
-            if numShift > 0 and numShift <= 25:
+            if numShift > 0 and numShift <= 25: #Check the shift number is greater than 1 and less or equal to 25
                 break
-
         except ValueError:
-            print("You must enter a number!")
+            print("You must enter a number!") #Error if a number isn't entered
         else:
-            print("You must enter a number from 1 to 25!")
+            print("You must enter a number from 1 to 25!") #Error if a number less than 1 or greater than 25 is entered
 
     decryptedMsg = ""
 
-    for symbol in decryptMsg:
-        if symbol.isalpha():
-            num = ord(symbol)
-            num -= numShift
+    #Loop through the alphabet array, shifting by the number inputted by the user
+    for i in range(len(alphabet)):
+        letter = alphabet[i]
+        shiftedLetter = alphabet[(i-numShift)%26]
+        newAlphabet[letter] = shiftedLetter #Shifted alphabet is put into the newAlphabet array
 
-            if symbol.isupper():
-                if num > ord('Z'):
-                    num -= 26
-                elif num < ord('A'):
-                    num += 26
-            elif symbol.islower():
-                if num > ord('z'):
-                    num -= 26
-                elif num < ord('a'):
-                    num += 26
-            decryptedMsg += chr(num)
+    #Loop through the letters in the text that was inputted by the user
+    for letter in decryptMsg:
+        if letter in alphabet:
+            letter = newAlphabet[letter]
+            decryptedMsg = decryptedMsg + letter
         else:
-            decryptedMsg -= symbol
+            decryptedMsg = decryptedMsg + letter
 
     print("Decrypted Message: " + decryptedMsg)
 
+#Prints out a list of all possible combinations based on the user's input should they not know the number of shifts
 def bruteForceDecrypt():
-    bruteForceMsg = input("Enter your message: ").lower()
+
+    bruteForceMsg = input("Enter your message: ").lower() #Enter the message for decryption
 
     possibleShift = ''
 
@@ -125,29 +119,19 @@ def bruteForceDecrypt():
     print("Shift(s): " + " " + "Message:")
     print("===================")
     
+    #Prints out a list of possible combinations from 1 to 26 shifts
     for possibleShift in range(1, 26):
-
         possibleMsg = ""
-        
-        for symbol in bruteForceMsg:
-            if symbol.isalpha():
-                num = ord(symbol)
-                num -= possibleShift
-
-                if symbol.isupper():
-                    if num > ord('Z'):
-                        num -= 26
-                    elif num < ord('A'):
-                        num += 26
-                elif symbol.islower():
-                    if num > ord('z'):
-                        num -= 26
-                    elif num < ord('a'):
-                        num += 26
-                possibleMsg += chr(num)
+        for i in range(26):
+            letter = alphabet[i]
+            shiftedLetter = alphabet[(i-possibleShift)%26]
+            newAlphabet[letter] = shiftedLetter
+        for letter in bruteForceMsg:
+            if letter in alphabet:
+                letter = newAlphabet[letter]
+                possibleMsg = possibleMsg + letter
             else:
-                possibleMsg -= symbol
-
+                possibleMsg = possibleMsg + letter     
         print("+" + str(possibleShift) + ": " +  "       " + possibleMsg)
     
 if __name__ == "__main__":
