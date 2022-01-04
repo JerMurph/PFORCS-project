@@ -20,4 +20,4 @@ When running this program for the first time, the user will be given a menu with
 
 </br></br>
 </h2><b>References:</b></h2></br>
-<a href ="https://www.dcode.fr/caesar-cipher">dCode</a> - Used this as a reference to compare with my program to ensure the cipher was correctly givng back the correct text.
+<a href ="https://www.dcode.fr/caesar-cipher">dCode</a> - Used this as a reference to compare with my program to ensure the cipher was correctly giving back the correct text.
